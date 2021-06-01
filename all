@@ -84,46 +84,18 @@ while True:
     #Merge Sort#
 #----------------------------------------------------------------------------------------------------------------------------------------#
 
-
     #convert input list into a list of lists of 2 numbers (with one list of one number if input contains an odd number of items) to be sorted later. 
-    def pair_sorter(lst):
-        #set an index variable to 0
+    def initial_divide(lst):
+    #set an index variable to 0
         z = 0
         #create empty output list
         out = []
-        #check if input contains odd number of elements
-        if len(lst) % 2 != 0:
-            #since input contains odd number of items, one item of the output must contain one element rather than 2
-            out.append([lst[0]])
-            z = 1
-        #loop through every other item of input list
+        #traverse the input list
         while z < len(lst) - 1:
-            #append lists to the output list
-            out.append([lst[z],lst[z+1]])
-            z += 2
+            #append each item of input as a new array in the output
+            out.append([lst[z]])
+            z += 1
         return out
-
-
-
-    #put every individual list in order
-    def initial_sort(lst):
-        out = []
-        # if the first item of the list contains one item e.g. [2], pop that off the list and append it to the output
-        if len(lst[0]) == 1:
-            out.append(lst.pop(0))
-            
-        for i in lst:
-            #pair is already in order
-            if i[0] < i[1]:
-                out.append(i)
-            #pair is not in order so we reverse it
-            if i[0] > i[1]:
-                b = i[0]
-                a = i[1]
-                out.append([a,b])
-        return out
-
-
 
     #collates two sorted lists into one sorted list
     def collate(lst0,lst1):
@@ -162,7 +134,7 @@ while True:
 
     #takes a list of any number of sorted lists, collates them all together and returns one sorted list.
     def final_col(lst):
-    
+
         res = lst
         out = []
         #variable used to increment through the list
@@ -194,21 +166,16 @@ while True:
             out = []
         
 
-    
+
 
         
 
 
     def merge_sort(lst):
-        lst = pair_sorter(lst)
-        lst = initial_sort(lst)
+        lst = initial_divide(lst)
         lst = final_col(lst)
         return lst
 
-
-
-
- 
 #----------------------------------------------------------------------------------------------------------------------------------------#
     #Random list Generator#
 #----------------------------------------------------------------------------------------------------------------------------------------#
