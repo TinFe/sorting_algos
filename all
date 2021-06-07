@@ -91,7 +91,7 @@ while True:
         #create empty output list
         out = []
         #traverse the input list
-        while z < len(lst) - 1:
+        while z < len(lst):
             #append each item of input as a new array in the output
             out.append([lst[z]])
             z += 1
@@ -144,7 +144,7 @@ while True:
         while True:
         
             #begin to traverse accross the res variable
-            while z < len(res) -1 :
+            while z < len(res) :
             
                 #because we are traversing through the res variable in increments of 2, the res variable must always contain an even number of elements.
                 #if res variable contains an odd number of elements, the first two items are collated together and the res variable now contains an even number of elements.
@@ -175,6 +175,57 @@ while True:
         lst = initial_divide(lst)
         lst = final_col(lst)
         return lst
+
+#----------------------------------------------------------------------------------------------------------------------------------------#    
+    #Merge sort with recursion
+#----------------------------------------------------------------------------------------------------------------------------------------#
+    def merge_sort_r(arr):
+        
+        if len(arr) == 1:
+            return arr
+
+            
+        middle = len(arr) // 2
+
+        left = arr[0:middle]
+        right = arr[middle:]
+
+        left = merge_sort_r(left)
+        right = merge_sort_r(right)
+        
+        return list(collate(left,right))
+
+
+
+
+
+
+
+
+
+#----------------------------------------------------------------------------------------------------------------------------------------#
+    #Quicksort
+#----------------------------------------------------------------------------------------------------------------------------------------#
+
+    def quicksort(arr):
+        left = []
+        right = []
+        pivot_list = []
+        if len(arr) <= 1:
+            return arr
+        else:
+            pivot = arr[-1]
+            for i in arr:
+                if i < pivot:
+                    left.append(i)
+                elif i > pivot:
+                    right.append(i)
+                else:
+                    pivot_list.append(i)
+
+            left = quicksort(left)
+            right = quicksort(right)
+            return left + pivot_list + right
 
 #----------------------------------------------------------------------------------------------------------------------------------------#
     #Random list Generator#
@@ -231,7 +282,7 @@ while True:
 
     lst = rand_list_generator(a,b,c)
     print(lst)
-    print("insertion, bubble, tim, insertion 2, or merge sort (i/b/t/i2/m)?")
+    print("insertion, bubble, tim, insertion 2, or merge sort (i/b/t/i2/m/m_r,q)?")
     inpt = input()
     
     if inpt == 'i2':
@@ -257,6 +308,14 @@ while True:
     if inpt == 'm':
         start = time.perf_counter()
         lst = merge_sort(lst)
+        elapsed = time.perf_counter() - start
+    if inpt == 'm_r':
+        start = time.perf_counter()
+        lst = merge_sort_r(lst)
+        elapsed = time.perf_counter() - start
+    if inpt == 'q':
+        start = time.perf_counter()
+        lst = quicksort(lst)
         elapsed = time.perf_counter() - start
 
 
